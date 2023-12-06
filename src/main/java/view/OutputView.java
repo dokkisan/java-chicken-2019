@@ -1,5 +1,8 @@
 package view;
 
+import domain.Receipt;
+import domain.ReceiptRepository;
+
 public class OutputView {
 
     public void printOneLineMessage(String message) {
@@ -20,19 +23,45 @@ public class OutputView {
     }
 
     public void printTables() {
-        // TODO
+        final String topOfTable = "┏ - ┓";
+        final String middleOfTable = "| %d |";
+        final String bottomOfTable = "┗ %s ┛";
+
+        for (int i = 0; i < ReceiptRepository.receipts().size(); i++) {
+            System.out.print(topOfTable);
+        }
+        System.out.print("\n");
+
+        for (Receipt receipt : ReceiptRepository.receipts()) {
+            int tableNumber = receipt.getTable().getNumber();
+            System.out.printf(middleOfTable, tableNumber);
+        }
+        System.out.print("\n");
+
+        for (Receipt receipt : ReceiptRepository.receipts()) {
+            boolean isOrdered = receipt.isOrdered();
+            if (isOrdered) {
+                System.out.printf(bottomOfTable, "#");
+            } else {
+                System.out.printf(bottomOfTable, "-");
+            }
+        }
+
+        System.out.print("\n");
+
+        printBlankLine();
     }
 
     public void printMenus() {
         final String availableMenus =
                 "[치킨] 1 - 후라이드 : 16000원\n" +
-                "[치킨] 2 - 양념치킨 : 16000원\n" +
-                "[치킨] 3 - 반반치킨 : 16000원\n" +
-                "[치킨] 4 - 통구이 : 16000원\n" +
-                "[치킨] 5 - 간장치킨 : 17000원\n" +
-                "[치킨] 6 - 순살치킨 : 17000원\n" +
-                "[음료] 21 - 콜라 : 1000원\n" +
-                "[음료] 22 - 사이다 : 1000원";
+                        "[치킨] 2 - 양념치킨 : 16000원\n" +
+                        "[치킨] 3 - 반반치킨 : 16000원\n" +
+                        "[치킨] 4 - 통구이 : 16000원\n" +
+                        "[치킨] 5 - 간장치킨 : 17000원\n" +
+                        "[치킨] 6 - 순살치킨 : 17000원\n" +
+                        "[음료] 21 - 콜라 : 1000원\n" +
+                        "[음료] 22 - 사이다 : 1000원";
 
         System.out.println(availableMenus);
         printBlankLine();

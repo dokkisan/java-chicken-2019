@@ -1,5 +1,6 @@
 package controller;
 
+import domain.ReceiptRepository;
 import message.Operation;
 import view.InputView;
 import view.OutputView;
@@ -32,6 +33,10 @@ public class Controller {
             }
             System.out.println(orderMenu);
             System.out.println(countOfOrderedMenu);
+
+            // 테이블, 영수증 생성
+//            TableRepository.tables().get(Integer.parseInt(selectedTable));
+            ReceiptRepository.receipts().get(Integer.parseInt(selectedTable) - 1).setOrdered(true);
         }
     }
 
@@ -52,6 +57,7 @@ public class Controller {
         while (true) {
             try {
                 outputView.printOneLineMessage(Operation.PROMPT_SELECT_TABLE.getMessage());
+                outputView.printTables();
                 return inputView.inputSelectTableNumber();
             } catch (IllegalArgumentException e) {
                 outputView.printOneLineMessage(e.getMessage());
