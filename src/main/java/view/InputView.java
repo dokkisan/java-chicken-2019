@@ -17,4 +17,8 @@ public class InputView {
     public String inputSelectTableNumber() {
         return validator.validateInputTableNumber(Console.readLine());
     }
+
+    public String inputOrderMenuNumber() {
+        return validator.validateInputMenuNumber(Console.readLine());
+    }
 }

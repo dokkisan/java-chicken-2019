@@ -24,10 +24,21 @@ public class OutputView {
     }
 
     public void printMenus() {
-        // TODO
+        final String availableMenus =
+                "[치킨] 1 - 후라이드 : 16000원\n" +
+                "[치킨] 2 - 양념치킨 : 16000원\n" +
+                "[치킨] 3 - 반반치킨 : 16000원\n" +
+                "[치킨] 4 - 통구이 : 16000원\n" +
+                "[치킨] 5 - 간장치킨 : 17000원\n" +
+                "[치킨] 6 - 순살치킨 : 17000원\n" +
+                "[음료] 21 - 콜라 : 1000원\n" +
+                "[음료] 22 - 사이다 : 1000원";
+
+        System.out.println(availableMenus);
+        printBlankLine();
     }
 
-    public void printOrderdMenus() {
+    public void printOrderedMenus() {
         // TODO
         // ## 주문 내역
         // 메뉴 수량 금액

@@ -14,8 +14,22 @@ public class Controller {
     }
 
     public void run() {
-        String selectedFeature = getSelectedFeature();
-        String selectedTable = getSelectTable();
+        while (true) {
+            String selectedFeature = getSelectedFeature();
+
+            // 프로그램 종료
+            if (selectedFeature.matches("3")) {
+                return;
+            }
+
+            String selectedTable = getSelectTable();
+
+            String orderMenu = "";
+            if (selectedFeature.equals("1")) {
+                orderMenu = getOrderMenu();
+            }
+            System.out.println(orderMenu);
+        }
     }
 
     private String getSelectedFeature() {
@@ -36,6 +50,17 @@ public class Controller {
             try {
                 outputView.printOneLineMessage(Operation.PROMPT_SELECT_TABLE.getMessage());
                 return inputView.inputSelectTableNumber();
+            } catch (IllegalArgumentException e) {
+                outputView.printOneLineMessage(e.getMessage());
+            }
+        }
+    }
+
+    private String getOrderMenu() {
+        while (true) {
+            try {
+                outputView.printMenus();
+                return inputView.inputOrderMenuNumber();
             } catch (IllegalArgumentException e) {
                 outputView.printOneLineMessage(e.getMessage());
             }
