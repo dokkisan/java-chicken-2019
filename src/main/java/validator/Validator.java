@@ -16,7 +16,6 @@ public class Validator {
         if (!inputTableNumber.matches("[1-8]")) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_VALID_TABLE_NUMBER.getMessage());
         }
-        // TODO: 글자수 확인
         return inputTableNumber;
     }
 
@@ -25,5 +24,13 @@ public class Validator {
             throw new IllegalArgumentException(ErrorMessage.INPUT_VALID_MENU_NUMBER.getMessage());
         }
         return inputMenuNumber;
+    }
+
+    public String validateInputCountOfOrderedMenu(String inputCount) {
+        // TODO: 재주문시에도 한 메뉴의 총 주문수량이 99개 이하인지 유효성 검사 필요!!
+        if (!inputCount.matches("[1-99]")) {
+            throw new IllegalArgumentException(ErrorMessage.INPUT_VALID_COUNT_OF_ORDERED_MENU.getMessage());
+        }
+        return inputCount;
     }
 }

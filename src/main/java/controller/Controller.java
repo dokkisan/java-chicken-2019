@@ -25,10 +25,13 @@ public class Controller {
             String selectedTable = getSelectTable();
 
             String orderMenu = "";
+            String countOfOrderedMenu = "";
             if (selectedFeature.equals("1")) {
                 orderMenu = getOrderMenu();
+                countOfOrderedMenu = getCountOfOrderedMenu();
             }
             System.out.println(orderMenu);
+            System.out.println(countOfOrderedMenu);
         }
     }
 
@@ -60,7 +63,19 @@ public class Controller {
         while (true) {
             try {
                 outputView.printMenus();
+                outputView.printOneLineMessage(Operation.PROMPT_ORDER_MENU.getMessage());
                 return inputView.inputOrderMenuNumber();
+            } catch (IllegalArgumentException e) {
+                outputView.printOneLineMessage(e.getMessage());
+            }
+        }
+    }
+
+    private String getCountOfOrderedMenu() {
+        while (true) {
+            try {
+                outputView.printOneLineMessage(Operation.PROMPT_COUNT_OF_ORDERED_MENU.getMessage());
+                return inputView.inputCountOfOrderedMenu();
             } catch (IllegalArgumentException e) {
                 outputView.printOneLineMessage(e.getMessage());
             }
