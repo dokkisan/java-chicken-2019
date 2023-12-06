@@ -1,7 +1,10 @@
 package view;
 
+import domain.Menu;
 import domain.Receipt;
 import domain.ReceiptRepository;
+
+import java.util.Map;
 
 public class OutputView {
 
@@ -67,11 +70,14 @@ public class OutputView {
         printBlankLine();
     }
 
-    public void printOrderedMenus() {
-        // TODO
-        // ## 주문 내역
-        // 메뉴 수량 금액
-        // 후라이드 1 16000
-        // 콜라 1 1000
+    public void printOrderedMenus(int tableNumber) {
+        ReceiptRepository receiptRepository = new ReceiptRepository();
+        Receipt receipt = receiptRepository.findReceiptByTableNumber(tableNumber);
+        System.out.println("## 주문 내역");
+        System.out.println("메뉴 수량 금액");
+        Map<Menu, Integer> menus = receipt.getOrderedMenus();
+        for (Map.Entry<Menu, Integer> orderedMenusAndCount : menus.entrySet()) {
+            System.out.println(orderedMenusAndCount.getKey().getName() + " " + orderedMenusAndCount.getValue() + " " + orderedMenusAndCount.getKey().getPrice());
+        }
     }
 }

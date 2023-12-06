@@ -14,4 +14,27 @@ public class ReceiptRepository {
     public static List<Receipt> receipts() {
         return Collections.unmodifiableList(receipts);
     }
+
+    public Receipt findReceiptByTableNumber(int tableNumber) {
+        TableRepository tableRepository = new TableRepository();
+        Table table = tableRepository.findByTableNumber(tableNumber);
+        for (Receipt receipt : receipts()) {
+            if (receipt.getTable().getNumber() == table.getNumber()) {
+                return receipt;
+            }
+        }
+        return null;
+    }
+
+    public void setReceipts(int tableNumber, Menu orderedMenu, int count) {
+        for (Table table : TableRepository.tables()) {
+            if (tableNumber == table.getNumber()) {
+                for (Receipt receipt : receipts()) {
+                    if (receipt.getTable().getNumber() == tableNumber) {
+                        receipt.addOrderedMenu(orderedMenu, count);
+                    }
+                }
+            }
+        }
+    }
 }

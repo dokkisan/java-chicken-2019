@@ -1,5 +1,6 @@
 package controller;
 
+import domain.MenuRepository;
 import domain.ReceiptRepository;
 import message.Operation;
 import view.InputView;
@@ -23,20 +24,25 @@ public class Controller {
                 return;
             }
 
-            String selectedTable = getSelectTable();
-
-            String orderMenu = "";
-            String countOfOrderedMenu = "";
+            String selectedTable = "";
             if (selectedFeature.equals("1")) {
-                orderMenu = getOrderMenu();
-                countOfOrderedMenu = getCountOfOrderedMenu();
-            }
-            System.out.println(orderMenu);
-            System.out.println(countOfOrderedMenu);
+                selectedTable = getSelectTable();
+                String inputOrderMenu = getOrderMenu();
+                String countOfOrderedMenu = getCountOfOrderedMenu();
 
-            // 테이블, 영수증 생성
-//            TableRepository.tables().get(Integer.parseInt(selectedTable));
-            ReceiptRepository.receipts().get(Integer.parseInt(selectedTable) - 1).setOrdered(true);
+                ReceiptRepository receiptRepository = new ReceiptRepository();
+                MenuRepository menuRepository = new MenuRepository();
+                receiptRepository.setReceipts(Integer.parseInt(selectedTable),
+                        menuRepository.findByNumber(Integer.parseInt(inputOrderMenu)),
+                        Integer.parseInt(countOfOrderedMenu));
+                receiptRepository.findReceiptByTableNumber(Integer.parseInt(selectedTable)).setOrdered(true);
+            }
+
+
+            if (selectedFeature.equals("2")) {
+                int tableNumber = Integer.parseInt(getSelectTable());
+                outputView.printOrderedMenus(tableNumber);
+            }
         }
     }
 
