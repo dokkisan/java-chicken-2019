@@ -14,8 +14,8 @@ public class Controller {
     }
 
     public void run() {
-        String selectFeature = getSelectedFeature();
-        System.out.println(selectFeature);
+        String selectedFeature = getSelectedFeature();
+        String selectedTable = getSelectTable();
     }
 
     private String getSelectedFeature() {
@@ -25,6 +25,17 @@ public class Controller {
                 outputView.printBlankLine();
                 outputView.printOneLineMessage(Operation.PROMPT_SELECT_FEATURE.getMessage());
                 return inputView.inputSelectFeature();
+            } catch (IllegalArgumentException e) {
+                outputView.printOneLineMessage(e.getMessage());
+            }
+        }
+    }
+
+    private String getSelectTable() {
+        while (true) {
+            try {
+                outputView.printOneLineMessage(Operation.PROMPT_SELECT_TABLE.getMessage());
+                return inputView.inputSelectTableNumber();
             } catch (IllegalArgumentException e) {
                 outputView.printOneLineMessage(e.getMessage());
             }
