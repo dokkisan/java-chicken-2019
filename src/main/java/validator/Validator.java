@@ -33,4 +33,11 @@ public class Validator {
         }
         return inputCount;
     }
+
+    public String validateInputPaymentMethod(String inputPaymentMethod) {
+        if (!inputPaymentMethod.matches("[1-2]")) {
+            throw new IllegalArgumentException("유효한 결제수단을 입력해주세요.");
+        }
+        return inputPaymentMethod;
+    }
 }

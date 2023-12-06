@@ -42,6 +42,10 @@ public class Controller {
             if (selectedFeature.equals("2")) {
                 int tableNumber = Integer.parseInt(getSelectTable());
                 outputView.printOrderedMenus(tableNumber);
+                int paymentMethod = Integer.parseInt(getPaymentMethod(tableNumber));
+
+                // 최종 결제 금액 계산
+                //
             }
         }
     }
@@ -88,6 +92,18 @@ public class Controller {
             try {
                 outputView.printOneLineMessage(Operation.PROMPT_COUNT_OF_ORDERED_MENU.getMessage());
                 return inputView.inputCountOfOrderedMenu();
+            } catch (IllegalArgumentException e) {
+                outputView.printOneLineMessage(e.getMessage());
+            }
+        }
+    }
+
+    private String getPaymentMethod(int tableNumber) {
+        while (true) {
+            try {
+                outputView.printOneLineMessage("## " + tableNumber + "번 테이블의 결제를 진행합니다.");
+                outputView.printOneLineMessage(Operation.PROMPT_PAYMENT_METHOD.getMessage());
+                return inputView.inputPaymentMethod();
             } catch (IllegalArgumentException e) {
                 outputView.printOneLineMessage(e.getMessage());
             }

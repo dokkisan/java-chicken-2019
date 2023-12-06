@@ -25,4 +25,8 @@ public class InputView {
     public String inputCountOfOrderedMenu() {
         return validator.validateInputCountOfOrderedMenu(Console.readLine());
     }
+
+    public String inputPaymentMethod() {
+        return validator.validateInputPaymentMethod(Console.readLine());
+    }
 }
