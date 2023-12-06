@@ -28,7 +28,7 @@ public class Validator {
 
     public String validateInputCountOfOrderedMenu(String inputCount) {
         // TODO: 재주문시에도 한 메뉴의 총 주문수량이 99개 이하인지 유효성 검사 필요!!
-        if (!inputCount.matches("[1-99]")) {
+        if (!inputCount.matches("[1-9]|[1-9][0-9]")) {
             throw new IllegalArgumentException(ErrorMessage.INPUT_VALID_COUNT_OF_ORDERED_MENU.getMessage());
         }
         return inputCount;
