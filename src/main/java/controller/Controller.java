@@ -1,10 +1,14 @@
 package controller;
 
+import domain.Menu;
 import domain.MenuRepository;
+import domain.Receipt;
 import domain.ReceiptRepository;
 import message.Operation;
 import view.InputView;
 import view.OutputView;
+
+import java.util.Map;
 
 public class Controller {
     private final InputView inputView;
@@ -45,7 +49,23 @@ public class Controller {
                 int paymentMethod = Integer.parseInt(getPaymentMethod(tableNumber));
 
                 // 최종 결제 금액 계산
-                //
+                // 치킨 10마리당 만원 할인
+                // 최종 결제 금액 계산
+                ReceiptRepository receiptRepository = new ReceiptRepository();
+                Receipt receipt = receiptRepository.findReceiptByTableNumber(tableNumber);
+
+                int totalAmount = 0;
+                int chickenCount = 0;
+                for (Map.Entry<Menu, Integer> orderInfo : receipt.getOrderedMenus().entrySet()) {
+                    totalAmount = orderInfo.getKey().getPrice() * orderInfo.getValue();
+                    if (orderInfo.getKey().getNumber() <= 6 ) {
+                        chickenCount++;
+                    }
+                }
+                int chickenDiscount = (chickenCount / 10) * 10_000;
+                System.out.println("chickenDiscount:"+chickenDiscount);
+
+                outputView.printTotalAmount(totalAmount - chickenDiscount);
             }
         }
     }

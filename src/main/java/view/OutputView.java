@@ -77,7 +77,14 @@ public class OutputView {
         System.out.println("메뉴 수량 금액");
         Map<Menu, Integer> menus = receipt.getOrderedMenus();
         for (Map.Entry<Menu, Integer> orderedMenusAndCount : menus.entrySet()) {
-            System.out.println(orderedMenusAndCount.getKey().getName() + " " + orderedMenusAndCount.getValue() + " " + orderedMenusAndCount.getKey().getPrice());
+            System.out.println(orderedMenusAndCount.getKey().getName() + " " + orderedMenusAndCount.getValue() + " " + orderedMenusAndCount.getKey().getPrice() * orderedMenusAndCount.getValue());
         }
+    }
+
+    public void printTotalAmount(int totalAmount) {
+//        ## 최종 결제할 금액
+//        17000원
+        System.out.println("## 최종 결제할 금액");
+        System.out.println(totalAmount + "원");
     }
 }
